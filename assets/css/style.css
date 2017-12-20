@@ -1,3 +1,9 @@
-body { background: url(../images/background.jpg)
 
+body { background: url(../images/background.jpg);
+}
+
+.container{ 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: x-large;
+    color: #e7b15a;
 }
