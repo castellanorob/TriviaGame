@@ -4,7 +4,7 @@ $('#start').on("click", function(){
     game.start();
 });
 //console.log(questions.)
-//Arrays for the questions
+//Objects for the questions
 
 var questions = [{
     question:"Gibson's most prominent guitar model is named for which popular Jazz guitarist?",
@@ -36,9 +36,9 @@ var questions = [{
 ]; 
 
 var game = {
-    correct = 0,
-    incorrect = 0,
-    counter = 120,
+    correct : 0,
+    incorrect : 0,
+    counter : 120,
     countdown: function(){
         game.counter --;
         $("#counter").html(game.counte);
@@ -47,20 +47,36 @@ var game = {
             game.done();
         }
     },
-    //timer that begins at the start of the game
+    //function that displays questions and answers
+    
     start: function(){
         timer = setInterval(game.countdown, 1000);
         $("#gamecontainer").prepend('<h2>Time Remaining: <span id="counter">120</span> Seconds </h2>');
         $("#start").remove();
+        var questionNumber;
             for (var i=0; i < questions.length; i++){
-        $("#gamecontainer").append('<h2>' + questions[i].question + "</h2>");
-            for (var j=0; j < questions[i].answers.length; j++);
-        $("#gamecontainer").append("<input type = 'radio' name = 'question-" + i + " 'value=' " + questions[i].answers[j] + "'>"
-            + questions[i].answers[j])
-        }
+                $("#gamecontainer").append('<h2>' + questions[i].question + "</h2>");
+                for (var j=0; j < questions[i].answers.length; j++){
+                    $("#gamecontainer").append("<input type = 'radio' name = 'question-" + i + " 'value=' " + questions[i].answers[j] + "'>"
+                        + questions[i].answers[j]);
+                }
+            }       
 
-    }
+        }
+    },
+
+ done = function(){
+     $.each($('input[name="question 1]: checked'), function(){
+         if($(this).val()==questions[0].correctAnswer){
+             game.correct++;
+         } else {
+             game.incorrect++;
+         }
+     })
+
  }
+
+
 
 
 
