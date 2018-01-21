@@ -2,8 +2,13 @@
 body { background: url(../images/background.jpg);
 }
 
-.container{ 
+.container { 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: x-large;
     color: #e7b15a;
+}
+
+.questions {
+    color: #e7b15a;
+
 }

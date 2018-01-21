@@ -1,11 +1,10 @@
-
-//function that displays questions and answers and starts the game
+//Function that displays questions and answers and starts the game
 $('#start').on("click", function(){
     game.start();
 });
-//console.log(questions.)
-//Objects for the questions
+//console.log(questions)
 
+//Objects for the questions
 var questions = [{
     question:"Gibson's most prominent guitar model is named for which popular Jazz guitarist?",
     answers:["Wes Montgomery", "Pat Metheny", "Les Paul", "Freddie Green"],
@@ -35,31 +34,48 @@ var questions = [{
 
 ]; 
 
+//Handled as a global variable
+var handled = null;
+
 var game = {
     correct : 0,
     incorrect : 0,
-    counter : 120,
+    counter : 60,
     countdown: function(){
-        game.counter --;
-        $("#counter").html(game.counte);
-        if(game.counter<=0){
+        $("#counter").html(game.counter);
+        if(game.counter==0){
             console.log("Time is up");
-            game.done();
+            game.counter=0;
+            clearInterval(handled);
+            handled = 0;
+            return false;  
         }
+        else {
+            game.counter --;
+        }
+        
     },
-    //function that displays questions and answers
-    
+
+    //Function that displays questions and answers
     start: function(){
-        timer = setInterval(game.countdown, 1000);
-        $("#gamecontainer").prepend('<h2>Time Remaining: <span id="counter">120</span> Seconds </h2>');
+        //Setting the time interval to 1 second
+        handled = setInterval(game.countdown, 1000);
+        //Displaying the start time for the counter
+        $("#gamecontainer").prepend('<h2>Time Remaining: <span id="counter">60</span> Seconds </h2> <br>');
+        //Removing the start button so that only the timer displays above the questions
         $("#start").remove();
+        //Looping through each question object to display questions and answers
         var questionNumber;
             for (var i=0; i < questions.length; i++){
-                $("#gamecontainer").append('<h2>' + questions[i].question + "</h2>");
+                //Creates a class for styling each individual question and answer set
+                var divElement = '<div class=questions>';
+                divElement+='<h2>' + questions[i].question + "</h2> <br>";
                 for (var j=0; j < questions[i].answers.length; j++){
-                    $("#gamecontainer").append("<input type = 'radio' name = 'question-" + i + " 'value=' " + questions[i].answers[j] + "'>"
-                        + questions[i].answers[j]);
+                    divElement+="<input type = 'radio' name = 'question-" + i + " 'value=' " + questions[i].answers[j] + "'>"
+                        + questions[i].answers[j];
                 }
+                divElement+='</div> <br>'
+                $("#gamecontainer").append(divElement);
             }       
 
         }
@@ -77,13 +93,10 @@ var game = {
  }
 
 
+//Function that records correct/incorrect answers
 
+//Function that ends the game when the timer runs out
 
+//Function that ends the game when the "submit" button at the bottom is selected
 
-//function that records correct/incorrect answers
-
-//function that ends the game when the timer runs out
-
-//function that ends the game when the "submit" button at the bottom is selected
-
-//function that displays correct/incorrect answers 
+//Function that displays correct/incorrect answers 
