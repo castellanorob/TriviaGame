@@ -4,7 +4,7 @@ $('#start').on("click", function(){
 });
 //console.log(questions)
 
-//Objects for the questions
+//Objects for each question and answer set
 var questions = [{
     question:"Gibson's most prominent guitar model is named for which popular Jazz guitarist?",
     answers:["Wes Montgomery", "Pat Metheny", "Les Paul", "Freddie Green"],
@@ -34,9 +34,10 @@ var questions = [{
 
 ]; 
 
-//Handled as a global variable
+//Setting handled as a global variable outside of the timer function
 var handled = null;
 
+//Timer countdown function
 var game = {
     correct : 0,
     incorrect : 0,
